@@ -35,8 +35,8 @@
 이 Structure는 십몇년간의 연구 성과로서 정형화되어 사용되어왔다. **Static, Rigid한 환경에서 조명의 변화가 크지 않고 인위적인 간섭이 없다면 SLAM기술은 이미 상당히 성숙하다.**
 # 2.3 Mathematical Representation of SLAM
 - 확률적 상태공간 모델에 기반하며, 두 가지 주요 방정식으로 이루어져 있다.
-	- **로봇의 자세가 시간에 따라 어떻게 변하는지**를 나타내는 **운동 모델** : $\mathbf{x}_k = f(\mathbf{x}_{k-1},\mathbf{u}_k,\mathbf{w}_k)$ 
-	- **센서가 관측한 랜드마크 정보**를 설명하는 **관측 모델** : $\mathbf{z}_{k,j} = h(\mathbf{y}_{j},\mathbf{x}_k,\mathbf{v}_{k,j})$ 
+	- **로봇의 자세가 시간에 따라 어떻게 변하는지**를 나타내는 **운동 모델** : $\mathbf{x}\_{k} = f(\mathbf{x}\_{k-1},\mathbf{u}\_{k},\mathbf{w}\_{k})$ 
+	- **센서가 관측한 랜드마크 정보**를 설명하는 **관측 모델** : $\mathbf{z}\_{k,j} = h(\mathbf{y}\_{j},\mathbf{x}\_{k},\mathbf{v}\_{k,j})$ 
 		- 사진이 찍힌 시점들만을 다루므로, $k=1,\cdots,K$ (Continuous -> Discrete)
 		- $\mathbf{x}$ : Camera Pose. (로봇이 이동한 경로 : $\mathbf{x}_1,\cdots,\mathbf{x}_K$ )
 		- $\mathbf{y}$ : Landmark Point. ($N$개의 Landmark Point들로 이루어진 지도 : $\mathbf{y}_1,\cdots,\mathbf{y}_N$ )
