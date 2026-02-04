@@ -71,9 +71,9 @@ public:
                         _estimate.focal * distortion * pc[1]);
     }
 
-    virtual bool read(istream &in) {}
+    virtual bool read(istream &in) override { return true; }
 
-    virtual bool write(ostream &out) const {}
+    virtual bool write(ostream &out) const override { return true; }
 };
 
 class VertexPoint : public g2o::BaseVertex<3, Vector3d> {
@@ -90,9 +90,9 @@ public:
         _estimate += Vector3d(update[0], update[1], update[2]);
     }
 
-    virtual bool read(istream &in) {}
+    virtual bool read(istream &in) override { return true; }
 
-    virtual bool write(ostream &out) const {}
+    virtual bool write(ostream &out) const override { return true; }
 };
 
 class EdgeProjection :
@@ -108,9 +108,9 @@ public:
     }
 
     // use numeric derivatives
-    virtual bool read(istream &in) {}
+    virtual bool read(istream &in) override { return true; }
 
-    virtual bool write(ostream &out) const {}
+    virtual bool write(ostream &out) const override { return true; }
 
 };
 
@@ -143,8 +143,8 @@ void SolveBA(BALProblem &bal_problem) {
     typedef g2o::BlockSolver<g2o::BlockSolverTraits<9, 3>> BlockSolverType;
     typedef g2o::LinearSolverCSparse<BlockSolverType::PoseMatrixType> LinearSolverType;
     // use LM
-    auto solver = new g2o::OptimizationAlgorithmLevenberg(
-        g2o::make_unique<BlockSolverType>(g2o::make_unique<LinearSolverType>()));
+    auto blockSolver = std::make_unique<BlockSolverType>(std::make_unique<LinearSolverType>());
+    auto *solver = new g2o::OptimizationAlgorithmLevenberg(std::move(blockSolver));
     g2o::SparseOptimizer optimizer;
     optimizer.setAlgorithm(solver);
     optimizer.setVerbose(true);
